@@ -1,0 +1,9 @@
+Procedure for GPU runs
+
+Step 1 : generate the input array on the host
+Step 2 : declare GPU memory pointers
+Step 3 : allocate GPU memory
+Step 4 : transfer the array to the GPU
+Step 5 : launch the kernel
+Step 6 : copy back the result array to the CPU
+Step 7 : Free memory
