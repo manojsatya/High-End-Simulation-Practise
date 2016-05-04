@@ -1,5 +1,5 @@
-#ifndef JULIASET_H
-#define JULIASET_H
+#ifndef JULIASET_CUH
+#define JULIASET_CUH
 #include "type.h"
 
 class juliaset
@@ -38,4 +38,4 @@ private:
     real zRe,zIm;
 };
 
-#endif // JULIASET_H
+#endif // JULIASET_CUH

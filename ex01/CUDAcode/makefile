@@ -1,7 +1,7 @@
 CC = g++
 NVCC = nvcc 
-NVCFLAGS = -O3 -std=c++11 -arch=sm_20 -dc
-CFLAGS = -O3 -Wall -Winline -Wshadow -ansi -std=c++11 
+NVCFLAGS = -O3 -arch=sm_20 -rdc=true
+CFLAGS = -O3 -Wall -Winline -Wshadow -ansi 
 TARGET = main
 OBJS = $(TARGET).o juliaset.o lodepng.o 
 
@@ -18,8 +18,6 @@ juliaset.o: juliaset.cu juliaset.cuh
 	
 lodepng.o: lodepng.cpp lodepng.h
 	$(CC) -c $(CFLAGS) lodepng.cpp
-	
-
 	
 clean:
 	@$(RM) -rf *.o $(TARGET) juliaCUDA
