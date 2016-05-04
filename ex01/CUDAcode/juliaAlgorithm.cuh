@@ -1,6 +1,7 @@
-std::vector<unsigned char> juliaAlgorithm(unsigned width, unsigned height, juliaset& C,std::vector<unsigned char> image){
+__global__
+void juliaAlgorithm(unsigned width, unsigned height, juliaset& C,std::vector<unsigned char> image){
 
-    std::cout << "Image is being created. Please wait ..... " << std::endl;
+    //std::cout << "Image is being created. Please wait ..... " << std::endl;
 
     for(unsigned i = 0;i< width;++i)
         for(unsigned j = 0;j< height;++j){
@@ -24,5 +25,5 @@ std::vector<unsigned char> juliaAlgorithm(unsigned width, unsigned height, julia
                 image[4 * width * j + 4 * i + 3] = iter;
             //std::cout << "Iteration Number:" << iter << std::endl;
         }
-    return image;
+    //return image;
 }

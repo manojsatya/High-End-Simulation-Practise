@@ -9,19 +9,25 @@ std::vector<unsigned char> juliaAlgorithm(unsigned width, unsigned height, julia
             real zimag = d.transform( height,j);
 
             juliaset zold(zreal,zimag);
-            unsigned iter;
+            unsigned iter, iterMax = 200;
 
 
-            for(iter = 1; iter < 400; iter++){
+            for(iter = 1; iter < iterMax; iter++){
             Z = (zold * zold) + C;
             zold = Z;
             if(Z.getMagnitude(Z) > 2) {break;}
             }
+            //int a = (iter>>24) & 0xff;
+            //int r = (iter>>16) & 0xff;
+            //int g = (iter>>8) & 0xff;
+            //int b = (iter) & 0xff;
                 //buffer to image
-                image[4 * width * j + 4 * i + 0] = iter;
-                image[4 * width * j + 4 * i + 1] = iter;
-                image[4 * width * j + 4 * i + 2] = iter;
-                image[4 * width * j + 4 * i + 3] = iter;
+                image[4 * width * j + 4 * i + 0] = 255 * (iter < 2)  ;
+                image[4 * width * j + 4 * i + 1] = 255 * (iter < 10) ;
+                image[4 * width * j + 4 * i + 2] = 255 * (iter < 15) ;
+                image[4 * width * j + 4 * i + 3] =  255 *  (iter < 20) ;
+              //  if ((iter>>24) & 0xff)
+       //image[width * j + i] = ((iter>>24) & 0xff) || ((iter>>16) & 0xff) ||  ((iter>>8) & 0xff) || (iter & 0xff);
             //std::cout << "Iteration Number:" << iter << std::endl;
         }
     return image;

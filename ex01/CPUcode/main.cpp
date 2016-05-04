@@ -6,10 +6,11 @@
 #include "Timer.h"
 #include "juliaAlgorithm.h"
 
+
 using namespace std;
 
 void encodeToPng(const std::string& filename,std::vector<unsigned char>& image, unsigned width, unsigned height,
-                 LodePNGColorType colortype = LCT_PALETTE,unsigned bitdepth = 4){
+                 LodePNGColorType colortype = LCT_PALETTE,unsigned bitdepth = 8){
 
       //Encode the image
       unsigned error = lodepng::encode(filename, image, width, height);
@@ -21,12 +22,13 @@ void encodeToPng(const std::string& filename,std::vector<unsigned char>& image, 
 int main(){
 
     real cRe,cIm;
-    unsigned width = 10240,height = 10240;
+    unsigned width = 2048,height = 2048;
     const char* filename1 = "julia1.png";const char* filename2 = "julia2.png" ;
 
     //Vector Image for buffering
     std::vector<unsigned char> image;
     image.resize(width * height * 4);
+
 
     hespa::Timer time; // Start timer
 
