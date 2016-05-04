@@ -1,29 +1,27 @@
-__global__
-void juliaAlgorithm(unsigned width, unsigned height, juliaset& C,std::vector<unsigned char> image){
+__global__ void juliaAlgorithm(unsigned char* d_image_out){
 
-    //std::cout << "Image is being created. Please wait ..... " << std::endl;
+    int ix = blockIdx.x * blockDim.x + threadIdx.x;
+    int iy = blockIdx.y * blockDim.y + threadIdx.y;
+    unsigned width = 2048,height = 2048;
 
-    for(unsigned i = 0;i< width;++i)
-        for(unsigned j = 0;j< height;++j){
+    real cRe = -0.8,cIm = 0.2;
+    juliaset C(cRe,cIm);
             juliaset Z,d;
-            real zreal = d.transform( width,i );
-            real zimag = d.transform( height,j);
+            real zreal = d.transform( width,ix );
+            real zimag = d.transform( height,iy);
 
             juliaset zold(zreal,zimag);
             unsigned iter;
 
 
-            for(iter = 1; iter < 400; iter++){
+            for(iter = 0; iter < 200; iter++){
             Z = (zold * zold) + C;
             zold = Z;
             if(Z.getMagnitude(Z) > 2) {break;}
             }
-                //buffer to image
-                image[4 * width * j + 4 * i + 0] = iter;
-                image[4 * width * j + 4 * i + 1] = iter;
-                image[4 * width * j + 4 * i + 2] = iter;
-                image[4 * width * j + 4 * i + 3] = iter;
-            //std::cout << "Iteration Number:" << iter << std::endl;
-        }
-    //return image;
+
+            d_image_out[3*ix + 3*2048*iy + 0] = (unsigned char)(255*(iter<2));
+            d_image_out[3*ix + 3*2048*iy + 1] = (unsigned char)(255*(iter<10));
+            d_image_out[3*ix + 3*2048*iy + 2] = (unsigned char)(255*(iter<30));
+
 }
